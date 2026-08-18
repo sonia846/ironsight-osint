@@ -16,7 +16,7 @@ def fetch_live_intel():
             feed = feedparser.parse(url)
             
             # Har feed se top 3 latest headlines nikalein
-            for entry in feed.entries[:3]:
+            for entry in feed.entries[:10]:
                 intel_items.append({
                     "source": source,
                     "title": entry.title,
