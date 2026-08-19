@@ -4,6 +4,7 @@ from rich.panel import Panel
 from rich.table import Table
 from modules.rss_fetcher import fetch_live_intel
 from modules.markets_tracker import fetch_market_data
+from modules.airspace_tracker import fetch_airspace_data
 
 console = Console()
 
@@ -42,13 +43,14 @@ def render_dashboard():
         
     layout["news_feed"].update(Panel(news_table, border_style="bright_blue"))
     
-    # Side Panel (Now fetching live financial markets)
+    # Fetch Data for Side Panel
     market_info = fetch_market_data()
+    airspace_info = fetch_airspace_data()
     
     layout["stats_panel"].update(
         Panel(
             f"[bold yellow]GLOBAL MARKETS[/bold yellow]\n{market_info}\n\n"
-            f"[bold red]AIRSPACE MONITORING[/bold red]\n[dim]Module Offline[/dim]\n\n"
+            f"[bold red]AIRSPACE MONITORING[/bold red]\n{airspace_info}\n\n"
             f"[bold yellow]TELEGRAM OSINT[/bold yellow]\n[dim]Module Offline[/dim]",
             title="METRICS", 
             border_style="magenta"
