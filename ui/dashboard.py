@@ -5,7 +5,7 @@ from rich.table import Table
 from modules.rss_fetcher import fetch_live_intel
 from modules.markets_tracker import fetch_market_data
 from modules.airspace_tracker import fetch_airspace_data
-
+from modules.telegram_scraper import fetch_telegram_alerts
 console = Console()
 
 def create_layout():
@@ -46,12 +46,13 @@ def render_dashboard():
     # Fetch Data for Side Panel
     market_info = fetch_market_data()
     airspace_info = fetch_airspace_data()
-    
+    telegram_info = fetch_telegram_alerts()
+
     layout["stats_panel"].update(
         Panel(
             f"[bold yellow]GLOBAL MARKETS[/bold yellow]\n{market_info}\n\n"
             f"[bold red]AIRSPACE MONITORING[/bold red]\n{airspace_info}\n\n"
-            f"[bold yellow]TELEGRAM OSINT[/bold yellow]\n[dim]Module Offline[/dim]",
+            f"[bold yellow]TELEGRAM OSINT[/bold yellow]\n{telegram_info}",
             title="METRICS", 
             border_style="magenta"
         )
